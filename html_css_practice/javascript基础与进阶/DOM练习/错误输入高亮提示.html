@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册信息错误时，输入框失去焦点后，高亮显示</title>
+    <style>
+        .wrong {
+            border: 2px solid red;
+            background-color: rgb(218, 142, 142);
+        }
+        .right {
+            border: 2px solid #91B81D;
+            background-color: #bfd47f;
+        }
+    </style>
+</head>
+
+<body>
+    账号：<input type="text" onblur="fn(this)" /><br><br>
+    密码：<input type="password" onblur="fn(this)" />
+
+    <script>
+        //需求：失去焦点的时候判断input按钮中的值，如果账号或密码在6-12个字符之间通过，否则报错。
+
+        function fn(ele) {
+            //html中的input标签行内调用function的时候,是先通过window调用的function，所以打印this等于打印window
+            console.log(this);// 此处fn是函数方法，this指代全局对象，此处是window
+            // 传递的参数，也就是ele和input中onblue="fn(this)"的this，两者才是元素本身
+            console.log(ele);// <input type="xxx" onblur="fn(this)" />
+            console.log(ele.value)// 结果为输入框中的输入值
+            if(ele.value.length < 6 || ele.value.length > 12){
+                ele.className = 'wrong';
+            }else{
+                ele.className = 'right';
+            }
+        }
+    </script>
+</body>
+
+</html>

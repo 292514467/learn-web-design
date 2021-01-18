@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动的性质一</title>
+    <!-- 性质一：浮动的元素脱标 -->
+    <!-- 一旦一个元素 浮动 了，那么将能够 并排，并且能够设置宽高，无论它原先是div还是span -->
+    <style>
+        /* span在标准流中是不能设置宽高的（因为是行内/内联元素），但是设置为浮动后，即使不转换为块元素，也能设置宽高 */
+        span{
+            float: left;
+            width: 200px;
+            height: 200px;
+            background-color: yellowGreen;
+        }
+    </style>
+</head>
+
+<body>
+    <span>一二三四五六七</span>
+</body>
+
+</html>

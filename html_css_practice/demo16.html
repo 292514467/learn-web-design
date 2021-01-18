@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示模式的转换</title>
+    <style>
+        a{
+            width: 100px;
+            height: 120px;
+            background-color: pink;
+            /* 把行内元素 a 转换为 块级元素 */
+            display: block;
+        }
+        div{
+            width: 100px;
+            height: 120px;
+            background-color: rgb(233, 128, 198);
+            /* 把块元素 div 转换为 行内元素 */
+            display: inline;
+        }
+        span{
+            width: 100px;
+            height: 120px;
+            background-color: rgb(71, 104, 131);
+            /* 把行内元素 span 转换为 行内块元素 */
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <a href="">123</a>
+    <a href="">123</a>
+    <div>321</div>
+    <div>321</div>
+    <span>asd</span>
+    <span>asd</span>
+</body>
+</html>

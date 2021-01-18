@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>offsetWidth 和 offsetHight</title>
+    <!-- `offsetWidth` 和 `offsetHight`：获取元素的 宽高 + padding + border ，不包括margin。 -->
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            border: 10px solid #000;
+            margin: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        let div = document.getElementsByTagName('div')[0];
+        console.log(div.offsetWidth);// 打印结果：140 （140=10+10+100+10+10）
+        console.log(typeof div.offsetWidth);// 打印结果：number
+
+    </script>
+</body>
+
+</html>

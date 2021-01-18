@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格细边框</title>
+    <style>
+        table {
+            width: 200px;
+            height: 180px;
+            border: 1px solid pink;
+        }
+
+        td {
+            border: 1px solid hotpink;
+            /* border-collapse:collapse 控制浏览器绘制表格的方式，控制相邻单元格的边框 */
+            /* border-collapse:collapse 合并相邻的边框，collapse是合并的意思 */
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th{
+            border: 1px solid hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 还未使用margin，暂时使用align代替 -->
+    <table align="center" cellspacing="0">
+        <thead>
+            <th>
+                111
+            </th>
+            <th>
+                222
+            </th>
+            <th>
+                333
+            </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>31</td>
+                <td>32</td>
+                <td>33</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除浮动三（内墙法）</title>
+    <!-- 内墙法（外墙法衍生） -->
+    <!-- 与外墙法相比，内墙法的优势（本质区别）在于：内墙法可以给它所在的父元素撑出宽度（让box1有高）。
+        即：box1的高度可以自适应内容。
+    而外墙法，虽然一道墙可以把两个div隔开，但是这两个div没有高，也就是说，无法wrap_content。 -->
+    <style>
+        /* 衍生的原因：浮动的子元素无法用内容将父元素div撑高 */
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        li {
+            float: left;
+            width: 100px;
+            height: 20px;
+            background-color: pink;
+        }
+
+        .wall {
+            clear: both;
+            height: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <ul>
+            <li>111</li>
+            <li>111</li>
+            <li>111</li>
+        </ul>
+        <!-- 在div的里面放一个div（作为内墙），就可以让父亲div恢复高度 -->
+        <div class="wall"></div>
+    </div>
+
+    <div class="box2">
+        <ul>
+            <li>222</li>
+            <li>222</li>
+            <li>222</li>
+        </ul>
+    </div>
+</body>
+
+</html>

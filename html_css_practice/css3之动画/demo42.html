@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css3之过渡</title>
+    <!-- 过渡：transition
+            transition 的中文含义是过渡，可以实现元素不同状态间的平滑过渡（补间动画），经常用来制作动画效果。
+            补间动画：自动完成从起始状态到终止状态的的过渡。不用管中间的状态 -->
+
+    <!-- - `transition-property: all;`  如果希望所有的属性都发生过渡，就使用all。
+        - `transition-duration: 1s;` 过渡的持续时间。
+        - `transition-timing-function: linear;`  运动曲线。属性值可以是：
+    - `linear` 线性
+    - `ease`  减速
+    - `ease-in` 加速
+    - `ease-out` 减速
+    - `ease-in-out`  先加速后减速 
+        - `transition-delay: 1s;` 过渡延迟。多长时间后再执行这个过渡动画。
+    复合写法：transition: 让哪些属性进行过度 过渡的持续时间 运动曲线 延迟时间;-->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 200px;
+            height: 180px;
+            background-color: yellowgreen;
+            margin: 100px auto;
+        
+            /* 只让宽度在变化时进行过渡 */
+            transition: width 1s linear 0s;
+            /* 让全部属性在变化时进行过渡，包括背景色和宽度 */
+            /* transition: all 1s linear 0s; */
+        }
+        .box:hover{
+            width: 400px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

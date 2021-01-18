@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>获取元素的样式</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let btn1 = document.getElementById('btn1');
+            let btn2 = document.getElementById('btn2');
+            let box1 = document.getElementById('box1');
+            btn1.onclick = function () {
+                // 修改box的样式
+                /*  通过JS修改元素的样式
+                     语法：元素.style.样式名 = 样式值
+                    
+                    通过style属性设置和读取的都是内联样式，无法读取内联表中的样式
+                */
+                box1.style.width = "300px";
+                /* css的样式名中带有 - ，
+                    这种名称在Js中是不合法的，例如background-color，
+                    需要将这种样式名修改为驼峰命名法，
+                    即 去掉 - ，将 - 后的字母改为大写*/
+
+                box1.style.backgroundColor = 'yellowgreen';
+            }
+            btn2.onclick = function(){
+                /*获取当前元素正在显示的样式
+                    语法：元素.currentStyle.样式名
+                    他可以用来读取当前元素正在显示的样式*/
+                // alert(box1.currentStyle.width); 
+                alert(box1.currentStyle.backgroundColor);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button id="btn1">点击</button>
+    <button id="btn2">获取元素当前正在显示的样式</button>
+    <br>
+    <br>
+    <div id="box1">
+    </div>
+</body>
+
+</html>

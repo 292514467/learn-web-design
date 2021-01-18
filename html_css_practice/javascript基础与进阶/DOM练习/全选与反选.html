@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全选和反选</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .my-table {
+            width: 300px;
+            margin: 100px auto 0;
+        }
+
+        table {
+            /* collapse合并单元格线 */
+            border-collapse: collapse;
+            /* border-spacing: 0; */
+            border: 1px solid #c0c0c0;
+            width: 300px;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "微软雅黑";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+        }
+
+        tbody tr:hover {
+            cursor: pointer;
+            background-color: #fafafa;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //需求1：点击上面的的input，下面全选或者反选。
+            //需求2：点击下面的的input，如果下面的全部选定了，上面的全选，否则相反。
+
+            let topInp = document.getElementById("title");
+            let tbody = document.getElementById("content");
+            let tbInpArr = tbody.getElementsByTagName("input");
+
+            //需求1思路：获取了上面的input按钮，只需要判断，checked属性是true还是false，如果是true，下面的全部变成true；false同理。
+            topInp.onclick = function () {
+                console.log('topInp中checked状态: ' + this.checked);
+                for (const tbInp of tbInpArr) {
+                    //优化版（被点击的input按钮的checked属性值，应该直接作为下面的所有的input按钮的checked属性值）
+                    tbInp.checked = this.checked;
+                }
+            }
+
+            //需求2思路：为下面的每一个input绑定事件，每点击一次都判断所有的按钮
+            // checked属性值是否全部都是true，如果有一个是false，
+            // 那么上面的input的checked属性也是false;都是true，topInp的checked就是true；
+            for (const tbInp of tbInpArr) {
+                tbInp.onclick = function () {
+                    //开闭原则（用开关来控制）
+                    let bool = true;
+                    // let isTrue = 0;
+                    for (const tbInp of tbInpArr) {
+                        if(!tbInp.checked){
+                            topInp.checked = false;
+                            bool = false;
+                        }
+                        // else{ isTrue++; }
+                    }
+                    // if(isTrue === tbInpArr.length){ topInp.checked = true; }
+                    // console.log(isTrue);
+                    // 用开关来控制头部的checkbox
+                    topInp.checked = bool;
+                    console.log(bool);
+                }
+            }
+            
+        }
+    </script>
+</head>
+
+<body>
+    <div class="my-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" id="title" />
+                    </th>
+                    <th>菜名</th>
+                    <th>饭店</th>
+                </tr>
+            </thead>
+            <tbody id="content">
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                    <td>菜品1</td>
+                    <td>木屋烧烤</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                    <td>菜品2</td>
+                    <td>蒸菜馆</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                    <td>菜品3</td>
+                    <td>海底捞火锅</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                    <td>菜品4</td>
+                    <td>面点王</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

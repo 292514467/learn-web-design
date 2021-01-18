@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css3之私有前缀</title>
+    <!-- 通过网址<http://caniuse.com/> 可以查询CSS3各特性的支持程度 -->
+
+    <!-- 处理兼容性问题的常见方法：为属性添加  私有前缀  。 -->
+    <style>
+        div {
+            width: 300px;
+            height: 100px;
+            margin: 10px auto;
+            border: 1px solid gray;
+
+            /* 这个属性的作用是：添加从左到右的线性渐变，颜色从pink变为hotpink。 */
+
+            /* 直接写是看不到效果的 */
+            background: linear-gradient(left, pink, hotpink);
+            /* 可以为浏览器 添加不同的私有前缀 ，属性就可以生效了。 */
+            background: -webkit-linear-gradient(left, pink, hotpink);
+            background: -moz-linear-gradient(left, pink, hotpink);
+            background: -ms-linear-gradient(left, pink, hotpink);
+            background: -o-linear-gradient(left, pink, hotpink);
+            /* -webkit-: 谷歌 苹果
+            -moz-:火狐
+            -ms-：IE
+            -o-：欧朋 */
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        123
+    </div>
+</body>
+
+</html>

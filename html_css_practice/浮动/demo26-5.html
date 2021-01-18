@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除浮动四</title>
+    <!-- 方法四： overflow:hidden; -->
+    <!-- overflow即“溢出”， hidden即“隐藏”。这个属性的意思是“溢出隐藏”。顾名思义：所有溢出边框的内容，都要隐藏掉 -->
+    <!-- `overflow:hidden;`的本意是清除溢出到盒子外面的文字。但是前端开发工程师发现它能做偏方——
+    ——只要给父亲加上 `overflow:hidden`;  那么，父亲就能被儿子撑出高了 -->
+    <style>
+        div{
+            /* 一个父元素不能被自己浮动的子元素撑出高度。 */
+            /* 只要给父元素加上 `overflow:hidden`;  父元素就能被子元素撑出高了 */
+            overflow: hidden;
+        }
+        li{
+            float: left;
+            width: 100px;
+            height: 20px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <ul>
+            <!--  浮动的子元素不能撑起父元素的高度。 -->
+            <li>111</li>
+            <li>111</li>
+            <li>111</li>
+        </ul>
+    </div>
+
+    <div class="box2">
+        <ul>
+            <li>222</li>
+            <li>222</li>
+            <li>222</li>
+        </ul>
+    </div>
+</body>
+</html>

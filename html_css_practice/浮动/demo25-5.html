@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动补充</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        /* 将para1和para2设置为浮动，它们是div的儿子，当para1+para2的宽度小于div的宽度，2会贴着1在div中
+        可如果设置para1+para2的宽度大于div的宽度，会发现para2掉下来，贴着左边框 */
+        div{
+            width: 400px;
+            height: 400px;
+            background-color: pink;
+        }
+        .para1{
+            float: left;
+            width: 100px;
+            height: 300px;
+            background-color: yellowgreen;
+        }
+        .para2{
+            float: left;
+            width: 200px;
+            /* width: 380px; */
+            height: 300px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="para1"></p>
+        <p class="para2"></p>
+    </div>
+</body>
+</html>

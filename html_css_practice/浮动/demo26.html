@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除浮动一</title>
+    <!-- 方法一：给浮动的祖先元素加高度 -->
+    <!-- **总结：**
+
+    **如果一个元素要浮动，那么它的祖先元素一定要有高度。**
+
+    **有高度的盒子，才能关住浮动**。（记住这句过来人的经验之语） -->
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        li {
+            /* 只给li设置style样式会使两个div的内容在同一行，
+            造成这种现象的根本原因是——li的父亲元素div没有设置高度，导致这两个div的高度均为0px */
+            float: left;
+            width: 100px;
+            height: 20px;
+            background-color: pink;
+        }
+
+        div {
+            /* 给父亲元素div设置一个合适的高度（至少保证高度大于儿子的高度），就可以看到正确的现象，即两个div分行显示 */
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li>111</li>
+            <li>111</li>
+            <li>111</li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <li>222</li>
+            <li>222</li>
+            <li>222</li>
+        </ul>
+    </div>
+</body>
+
+</html>

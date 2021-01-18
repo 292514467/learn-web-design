@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航栏及导航栏版心</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        /* 1、先设置body中字体与大小 */
+        body {
+            font-size: 14px;
+            font-family: "Microsoft YaHei", "SimSun";
+            height: 8888px;
+        }
+
+        .header {
+            height: 58px;
+            background-color: #191D3A;
+        }
+
+        /* 版心 */
+        .inner_c {
+            width: 1000px;
+            /* 设置版心在水平居中 */
+            margin: 0 auto;
+        }
+
+        .header .logo {
+            float: left;
+            /* 设置为左浮动 */
+            padding-left: 12px;
+            margin-right: 40px;
+            /* 右边距，即离nav内容40px */
+            width: 174px;
+            height: 58px;
+            /* 没有logo图片，用文字暂时代替 */
+            font-size: 0.8em;
+            line-height: 58px;
+            text-align: center;
+            background-color: rgba(161, 157, 157, 0.384);
+        }
+
+        .header .logo a {
+            display: block;
+            width: 174px;
+            height: 58px;
+            /* 
+            背景要放在里层的a标签里，不要放在外层的h1标签里。
+            假设背景图放在h1里，那么不管h1的padding有多大，背景图的位置都不会变。
+
+            background: url('');
+            background-repeat: no-repeat;
+            
+            由于搜索引擎是搜不到图片的，所以一定要把“博雅互动”这几个文字加上去，
+            然后通过`text-indent`缩进的属性把文字赶走到视线以外的地方。
+            这是做搜索引擎优化的一个重要的技巧。
+            
+            text-indent: -999em;
+            
+             */
+            color: white;
+            text-decoration: none;
+        }
+
+        .header .nav {
+            float: left;
+        }
+
+        /* 记得去除无序列表ul前的圆点 */
+        .header .nav ul {
+            list-style: none;
+            /*去掉列表前面的圆点*/
+        }
+
+        .header .nav ul li {
+            float: left;
+            width: 100px;
+            line-height: 58px;
+            /*让行高等于这一行的高度，保证里面的文字垂直居中*/
+            border-left: 1px solid #252947;
+            /*每个li之间有间隔线*/
+        }
+
+        .header .nav ul li.last {
+            border-right: 1px solid #252947;
+            /*最后一个li的右边加间隔线*/
+        }
+
+        .header .nav ul li a {
+            display: block;
+            height: 58px;
+            text-decoration: none;
+            text-align: center;
+            color: #818496;
+        }
+
+        .header .nav ul li a.current {
+            /* nav中第一个导航项目 */
+            color: white;
+            background: #252947;
+        }
+
+        .header .nav ul li a:hover {
+            color: white;
+            background: #252947;
+        }
+
+        .header .jrwm_box {
+            float: left;
+            height: 46px;
+            width: 100px;
+            padding-left: 48px;
+            padding-top: 12px;
+        }
+
+        .header .jrwm_box .jrwm {
+            height: 34px;
+            margin: 0 auto;
+            text-align: center;
+            /* 让这个div内部的超链接居中 */
+        }
+
+        .header .jrwm_box .jrwm a {
+            /*将超链接转为块儿，可以保证其霸占父亲的整行*/
+            display: block;
+            color: white;
+            line-height: 34px;
+            text-decoration: none;
+            background-color: yellowgreen;
+        }
+
+        .banner a {
+            background: url(lolBackgroundImage.jpg);
+            display: block;
+            width: 100%;
+            /* width: 1000px; */
+            height: 465px;
+            background-position: center center;
+            text-decoration: none;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding-top: 50px;
+        }
+
+        .content .product {
+            height: 229px;
+            border-bottom: 1px solid #DBE1E7;
+        }
+
+        .content .product ul {
+            list-style: none;
+        }
+
+        .content .product ul li {
+            float: left;
+            width: 218px;
+            margin-right: 43px;
+            /* border: 0.1px solid black; */
+        }
+
+        .content .product ul li.last {
+            margin-right: 0;
+            width: 217px;
+        }
+
+        .content .product ul li p.img {
+            display: block;
+            width: 218px;
+            height: 130px;
+            background-color: pink;
+        }
+
+        .content .product ul li.last p.img {
+            width: 217px;
+        }
+
+        .content .product ul li h3 {
+            text-align: center;
+            line-height: 38px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .content .product ul li p.djbf {
+            text-align: center;
+            line-height: 16px;
+        }
+
+        .content .product ul li p.djbf a {
+            text-decoration: none;
+            font-size: 12px;
+            color: #38B774;
+            text-decoration: none;
+            padding-right: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="inner_c">
+            <!--这样写虽然视觉效果上达到了，但是搜索引擎是搜不到图片的，不利于SEO。 
+                <div class="logo">
+                    <h4>logo</h4>
+                </div> -->
+            <h1 class="logo">
+                <a href="#">
+                    博雅互动-世界上最好的游戏公司
+                </a>
+            </h1>
+            <div class="nav">
+                <ul>
+                    <li><a href="#" class="current">首页</a></li>
+                    <li><a href="#">博雅游戏</a></li>
+                    <li><a href="#">博雅新闻</a></li>
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">客服中心</a></li>
+                    <li class="last"><a href="#">投资者关系</a></li>
+                </ul>
+            </div>
+            <div class="jrwm_box">
+                <div class="jrwm">
+                    <a href="https://www.baidu.com/" target="_blank">加入我们</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 在导航条和banner之间隔一堵墙——外墙法 -->
+    <div class="wall"></div>
+
+    <div class="banner">
+        <a href="">轮播图部分，因为涉及到js部分，暂时省略</a>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content inner_c">
+        <div class="product">
+            <ul>
+                <li>
+                    <p class="img">
+                        这里原来应该有图片
+                    </p>
+                    <h3>BPT宣传片</h3>
+                    <p class="djbf">
+                        <a href="#">点击播放</a>
+                    </p>
+                </li>
+                <li>
+                    <p class="img">
+                        这里原来应该有图片
+                    </p>
+                    <h3>BPT宣传片</h3>
+                    <p class="djbf">
+                        <a href="#">点击播放</a>
+                    </p>
+                </li>
+                <li>
+                    <p class="img">
+                        这里原来应该有图片
+                    </p>
+                    <h3>BPT宣传片</h3>
+                    <p class="djbf">
+                        <a href="#">点击播放</a>
+                    </p>
+                </li>
+                <li class="last">
+                    <p class="img">
+                        这里原来应该有图片
+                    </p>
+                    <h3>BPT宣传片</h3>
+                    <p class="djbf">
+                        <a href="#">点击播放</a>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>禁用文本框/解禁文本框</title>
+</head>
+
+<body>
+
+    账号: <input type="text" value="账号账号账号..." /><button>禁用</button><button>解禁</button><br><br>
+    密码: <input type="password" value="aaabbbccc" />
+
+    <script>
+
+        var inpArr = document.getElementsByTagName("input");
+        var btn1 = document.getElementsByTagName("button")[0];
+        var btn2 = document.getElementsByTagName("button")[1];
+
+        btn1.onclick = function () {
+            for (const ele of inpArr) {
+                // `disabled`这个属性出现即可禁用,所以，属性值里可以写数字，字符串等任意值，但不能写0，不能写false，不能为空。
+                // 一般属性值写no。
+                ele.disabled = 'no';// 禁用文本框。属性值里随便写什么字符串都行，但不能为空。
+            }
+        }
+        btn2.onclick = function () {
+            for (const ele of inpArr) {
+                ele.disabled = false;// 解禁文本框。让disabled属性消失即可。
+                // ele.removeAttribute("disabled");
+            }
+        }
+    </script>
+</body>
+
+</html>

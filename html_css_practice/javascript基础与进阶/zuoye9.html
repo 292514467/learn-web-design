@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全选练习</title>
+    <script>
+        window.onload = function () {
+
+            /* 全选按钮
+              -点击按钮后，四个框全被选中*/
+            var checkedAllBtn = document.getElementById('checkedAllBtn');
+
+            var checkedNoBtn = document.getElementById('checkedNoBtn');
+            var checkedRevBtn = document.getElementById('checkedRevBtn');
+
+
+            var checkAllBox = document.getElementById('checkAllBox');
+
+            let hobby = document.getElementsByName('hobby');
+
+            // 不知道为什么无法将checked设置为true————————?????
+            checkedAllBtn.onclick = function () {
+                for (let i = 0; i < hobby.length; i++) {
+                    // checkbox的 checked 属性设置或返回checkbox是否应被选中
+                    hobby[i].checked = true;
+                }
+                checkAllBox.checked = true;
+            }
+            checkedNoBtn.onclick = function () {
+                for (let i = 0; i < hobby.length; i++) {
+                    // checkbox的 checked 属性设置或返回checkbox是否应被选中
+                    hobby[i].checked = false;
+                }
+                checkAllBox.checked = false;
+            }
+            checkedRevBtn.onclick = function () {
+
+                checkAllBox.checked = true;
+                
+                for (let i = 0; i < hobby.length; i++) {
+                    hobby[i].checked = !hobby[i].checked;
+                    if (!hobby[i].checked) {
+                        checkAllBox.checked = false;
+                    }
+                }
+            }
+            checkAllBox.onclick = function () {
+                for (let i = 0; i < hobby.length; i++) {
+                    hobby[i].checked = checkAllBox.checked;
+                }
+            }
+
+            // 给四个多选框分别绑定事件
+            for (let i = 0; i < hobby.length; i++) {
+                hobby[i].onclick = function () {
+                    // 点击多选框时，先将checkAllBox设置为选中
+                    checkAllBox.checked = true;
+                    // 遍历四个多选框
+                    for (let j = 0; j < hobby.length; j++) {
+                        if (!hobby[i].checked) {
+                            checkAllBox.checked = false;
+                            // 检测是否有多选框未选中，有未选中的则将checkAllBox设置为未选中，结束循环
+                            break;
+                        }
+                    }
+                };
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form action="" method="POST">
+
+        <span>你爱好的运动是?</span>
+        <input type="checkbox" id="checkAllBox">全选/全不选
+        <br>
+
+        <input type="checkbox" name="hobby" value="足球">足球
+        <input type="checkbox" name="hobby" value="篮球">篮球
+        <input type="checkbox" name="hobby" value="羽毛球">羽毛球
+        <input type="checkbox" name="hobby" value="乒乓球">乒乓球
+        <br>
+        <button id="checkedAllBtn">全选</button>
+        <button id="checkedNoBtn">全不选</button>
+        <button id="checkedRevBtn">反选</button>
+        <button id="sendBtn">提交</button>
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调用封装的访问关系的函数</title>
+    <style>
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            margin: 5px;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li id="box"></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script src="tool.js"></script>
+    <script>
+        let box = getEle('box');
+        box.style.backgroundColor = 'red';
+
+        let parent = box.parentNode;
+        getFirstNode(parent).style.backgroundColor = 'yellowgreen';
+        getLastNode(parent).style.backgroundColor = 'yellowgreen';
+
+        getNextNode(box).style.backgroundColor = 'skyblue';
+        getPrevNode(box).style.backgroundColor = 'skyblue';
+
+        //获取所有的兄弟节点（返回值是数组，所以用for循环操作）
+        let arr = getAllSiblings(box);
+        for (var i = 0; i < arr.length; i++) {
+            console.log(arr[i].style.backgroundColor);
+            // arr[i].style.backgroundColor = "green";
+        }
+    </script>
+</body>
+
+</html>

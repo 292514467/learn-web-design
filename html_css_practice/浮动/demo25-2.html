@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动的性质二</title>
+    <!-- 性质二：浮动的元素互相贴靠 -->
+    <style>
+        /* 当拖动改变浏览器窗口大小时，可以看到div3从靠着div2，到靠着div1，如果没有足够的空间靠着div1，则div3会自己贴最左边 */
+        .box1{
+            float: left;
+            font-weight: 700;
+            font-size: 30px;
+            width: 300px;
+            height: 250px;
+            background-color: yellowGreen;
+        }
+        .box2{
+            float: left;
+            font-weight: 700;
+            font-size: 30px;
+            width: 300px;
+            height: 300px;
+            background-color: skyblue;
+
+        }
+        .box3{
+            float: left;
+            font-weight: 700;
+            font-size: 30px;
+            width: 300px;
+            height: 400px;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+    <div class="box3">3</div>
+</body>
+</html>

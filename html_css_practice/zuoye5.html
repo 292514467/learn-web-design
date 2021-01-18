@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>将页面的无序列表清除浮动</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        div {
+            width: 200px;
+            height: 100px;
+            border: 3px solid black;
+
+        }
+
+        .content {
+            float: left;
+        }
+
+        .time {
+            float: right;
+        }
+
+        li {
+            overflow: hidden;
+            /* background-color: rgb(128, 114, 114); */
+            background-color: pink;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li>
+                <span class="content">内容1</span>
+                <span class="time">时间1</span>
+            </li>
+            <li>
+                <span class="content">内容2</span>
+                <span class="time">时间2</span>
+            </li>
+            <li>
+                <span class="content">内容3</span>
+                <span class="time">时间3</span>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

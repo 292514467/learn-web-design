@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css3之2D转换</title>
+    <!-- 转换——transform -->
+    <!-- 转换是 CSS3 中具有颠覆性的一个特征，可以实现元素的 位移、旋转、变形、缩放 ，甚至支持矩阵方式。 -->
+    <!-- 在 CSS3 当中，通过 `transform` 转换来实现 2D 转换或者 3D 转换。
+        - 2D转换包括：缩放、移动、旋转。 -->
+
+    <!-- 缩放：scale    transform: scale(x, y);
+        参数解释：x:表示水平方向的缩放倍数。y:表示垂直方向的缩放倍数。如果只写一个值就是等比例缩放。不能为百分比。-->
+    <!-- 位移：translate    transform: translate(水平位移，垂直位移); transform: translate(-50%, -50%);
+        参数解释：参数为百分比，相对于自身移动。
+                 正值：向右和向下。 负值：向左和向上。如果只写一个值，则表示水平移动。-->
+    <!-- 旋转：rotate   transform:rotate(角度); transform:rotate(45deg);
+        参数解释：正值：顺时针； 负值：逆时针 
+        rotate 旋转时，默认是以盒子的正中心为坐标原点的。如果想**改变旋转的坐标原点**，可以用`transform-origin`属性。
+            transform-origin: 水平坐标 垂直坐标; transform-origin: center bottom;   //旋转时，以盒子底部的中心为坐标原点-->
+    <style>
+        .box {
+            width: 1000px;
+            height: 200px;
+            margin: 100px auto;
+        }
+
+        .box > div {
+            width: 300px;
+            height: 150px;
+            background-color: pink;
+            float: left;
+            margin-right: 15px;
+            color: white;
+            text-align: center;
+            font: 400 30px/150px “宋体”;
+
+        }
+
+        .box .box2 {
+            background-color: green;
+            transition: all 1s;
+        }
+
+        .box .box2:hover {
+            /*width: 500px;*/
+            /*height: 400px;*/
+            background-color: yellowgreen;
+
+            /* transform:  css3中用于做变换的属性
+                scale(x,y)：缩放 */
+            transform: scale(2, 0.5);
+            /* transform: translate(-50%, -50%); */
+        }
+
+        .boxx {
+            width: 1000px;
+            height: 200px;
+            margin: 100px auto;
+            color: white;
+            text-align: center;
+            font: 400 30px/150px “宋体”;
+        }
+
+        .boxx > div {
+            width: 300px;
+            height: 150px;
+            /* border: 1px solid #000; */
+            background-color: red;
+            float: left;
+            margin-right: 15px;
+        }
+
+        .boxx .boxx2{
+            background-color: pink;
+            transition: all 1s;
+        }
+        /* div:nth-child(2) {
+            background-color: pink;
+            transition: all 1s;
+        } */
+
+        /* translate:(水平位移，垂直位移)*/
+        .boxx .boxx2:hover {
+            transform: translate(-50%, -50%);
+        }
+
+        .boxxx{
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+            margin: 50px auto;
+            color: #fff;
+            font-size: 50px;
+            /* 如果没有这行过渡的代码，旋转会直接一步到位，则不是期望的效果 */
+            transition: all 2s;/* 过渡：让盒子在进行 transform 转换的时候，有个过渡期 */
+        }
+        .boxxx:hover{
+            transform: rotate(-900deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="box1">1</div>
+        <div class="box2">2</div>
+        <div class="box3">3</div>
+    </div>
+    <div class="boxx">
+        <div class="boxx1">1</div>
+        <div class="boxx2">2</div>
+        <div class="boxx3">3</div>
+    </div>
+    <div class="boxxx">123</div>
+</body>
+
+</html>

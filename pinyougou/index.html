@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>品优购商城-综合网购首选-正品低价、品质保障、配送及时、轻松购物！
+        <!-- TDK三大标签迎合搜索引擎SEO优化
+            title、description、keywords -->
+    </title>
+    <!-- 网站说明 -->
+    <meta name="description"
+        content="品优购商城-专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货、服装服饰、母婴、图书、食品等数万个品牌优质商品.便捷、诚信的服务，为您提供愉悦的网上购物体验!" />
+    <!-- 关键字 -->
+    <meta name="keywords" content="网上购物,网上商城,手机,笔记本,电脑,MP3,CD,VCD,DV,相机,数码,配件,手表,存储卡,京东" />
+    <!-- 引入favicon图标 -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- 引入初始化样式文件 -->
+    <link rel="stylesheet" href="css/base.css">
+    <!-- 引入公共的样式文件 -->
+    <link rel="stylesheet" href="css/common.css">
+    <!-- 引入首页index.css样式文件 -->
+    <link rel="stylesheet" href="css/index.css">
+
+    <script>
+        window.onload = function () {
+            // 1、获取事件源以及相关元素
+            let main = document.getElementsByClassName('main')[0];
+            let focus = document.getElementsByClassName('focus')[0];
+            let imgWidth = focus.offsetWidth;
+            let ul = focus.firstElementChild;
+            let ol = focus.children[1];
+            let div = focus.lastElementChild;
+            let spanArr = div.children;
+
+            // 设置两个定时器，一个记录图片，一个记录小方块
+            let key = square = 0;
+
+            // 2、复制第一张图片所在的li，添加到ul的最后
+            let ulNewLi = ul.children[0].cloneNode(true);
+            ul.appendChild(ulNewLi);
+
+            // 3、给ol中添加li，数量为ul中li的个数-1个，并点亮第一个
+            for (let i = 0; i < ul.children.length - 1; i++) {
+                let olNewLi = document.createElement('li');
+                olNewLi.innerHTML = i + 1;
+                ol.appendChild(olNewLi);
+            }
+            let olLiArr = ol.children;
+            olLiArr[0].className = 'current';
+
+            // 4、鼠标放到ol的li上切换图片
+            for (let i = 0; i < olLiArr.length; i++) {
+                // 将i设置为ol中li的下标，使其对应图片
+                olLiArr[i].index = i;
+                olLiArr[i].onmouseover = function () {
+                    // 排他思想，先将所有li的类名改为空
+                    for (let j = 0; j < olLiArr.length; j++) {
+                        olLiArr[j].className = '';
+                    }
+                    // 将当前li的类名改为current
+                    this.className = 'current';
+                    // 鼠标放到小方块上的时候索引值和key以及square同步
+                    key = square = this.index;
+                    // 移动盒子
+                    animate(ul, imgWidth * (-this.index));
+                }
+            }
+
+            // 5、添加定时器
+            let timer = setInterval(autoPlay, 3000);
+
+            // 固定向右切换图片
+            function autoPlay() {
+                console.log('ul.offsetLeft = ' + ul.offsetLeft);
+                console.log('ul.style.left = ' + ul.style.left);
+                // 控制key自增来模拟图片的索引，然后移动ul
+                key++;
+                if (key > olLiArr.length - 1) {
+                // if (key > ul.children.length - 1) {
+                    // 当图片滑动到最后一张时，先跳转到第一张，                 
+                    ul.style.left = 0;
+                    // 然后再滑动到第二张
+                    key = 1;
+                }
+                animate(ul, -key * imgWidth);
+                // console.log(ul.offsetLeft);
+                // console.log(ul.style.left);
+                // 控制square自增来模拟小方块的索引，然后点亮ol小盒子
+                square++;
+                if (square > olLiArr.length - 1) {
+                    // 索引值不能大于等于图片的张数，若大于等于4，将其变为0
+                    suqare = 0;
+                }
+
+                for (let i = 0; i < olLiArr.length; i++) {
+                    olLiArr[i].className = '';
+                }
+                olLiArr[square].className = 'current';
+            }
+
+            // 鼠标放上去时清除定时器，移开后再开启定时器
+            main.onmouseover = function () {
+                // 显示左右两个箭头方块
+                div.style.display = 'block';
+                clearInterval(timer);
+            }
+            main.onmouseout = function () {
+                // 使左右两个箭头方块消失
+                div.style.display = 'none';
+                timer = setInterval(autoPlay, 3000);
+            }
+
+            // 6、左右切换图片（鼠标放上去时显示，移开隐藏）
+            spanArr[0].onclick = function () {
+                key--;
+                if (key < 0) {
+                    ul.style.left = imgWidth * (-olLiArr.length) + 'px';
+                    key = olLiArr.length - 1;
+                }
+                animate(ul, imgWidth * (-key));
+
+                square--;
+                if (square < 0) {
+                    square = olLiArr.length - 1;
+                }
+                for (let i = 0; i < olLiArr.length; i++) {
+                    olLiArr[i].className = '';
+                }
+                olLiArr[square].className = 'current';
+            }
+
+            spanArr[1].onclick = function () {
+                //右侧的和定时器一模一样
+                autoPlay();
+            }
+
+            // 封装动画函数，10ms移动10px
+            function animate(ele, target) {
+                // 首先清理定时器
+                clearInterval(ele.timer);
+                // speed是前进步长，超过目标则取-10后退
+                let speed = target > ele.offsetLeft ? 10 : -10;
+                // 设置定时器
+                ele.timer = setInterval(function () {
+                    // 先获取目标与元素当前offsetLeft之间的距离
+                    let val = target - ele.offsetLeft;
+                    ele.style.left = ele.offsetLeft + speed + 'px';
+                    if (Math.abs(speed) > Math.abs(val)) {
+                        // 若距离小于步长speed，则直接使其等于target，不再移动图片
+                        ele.style.left = target + 'px';
+                        // 清除定时器
+                        clearInterval(ele.timer);
+                    }
+                }, 10)
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 快捷导航模块start -->
+    <section class="shortcut">
+        <div class="w">
+            <div class="shortcut">
+                <div class="fl">
+                    <ul>
+                        <li>品优购欢迎您！&nbsp;</li>
+                        <li>
+                            <a href="#">请登录</a>&nbsp;&nbsp;<a href="#" class="style_red">免费注册</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fr">
+                    <ul>
+                        <li>我的订单</li>
+                        <li></li>
+                        <li class="arrow-icon">我的品优购</li>
+                        <li></li>
+                        <li>品优购会员</li>
+                        <li></li>
+                        <li>企业采购</li>
+                        <li></li>
+                        <li class="arrow-icon">关注品优购</li>
+                        <li></li>
+                        <li class="arrow-icon">客户服务</li>
+                        <li></li>
+                        <li class="arrow-icon">网站导航</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- 快捷导航模块end -->
+    <!-- hearder头部模块制作 start -->
+    <header class="header w">
+        <!-- logo模块 -->
+        <div class="logo">
+            <h1>
+                <a href="index.html" title="品优购商城">优惠购首发</a>
+            </h1>
+        </div>
+        <!-- search模块 -->
+        <div class="search">
+            <input type="text" placeholder="语言开发">
+            <button>搜索</button>
+        </div>
+        <!-- hotwords模块 -->
+        <div class="hotwords">
+            <ul>
+                <a href="#" class="style_red">优惠购首发</a>
+                <a href="#">亿元优惠</a>
+                <a href="#">9.9元团购</a>
+                <a href="#">美满99减30</a>
+                <a href="#">办公用品</a>
+                <a href="#">电脑</a>
+                <a href="#">通信</a>
+            </ul>
+        </div>
+        <!-- 购物车模块 -->
+        <div class="shopcar">
+            我的购物车
+            <i class="count">18</i>
+        </div>
+    </header>
+    <!-- hearder头部模块制作 end -->
+    <!-- nav模块制作 start -->
+    <nav class="nav">
+        <div class="w">
+            <div class="dropdown">
+                <div class="dt">全部商品分类</div>
+                <div class="dd">
+                    <ul>
+                        <li><a href="#">家用电器</a> </li>
+                        <li><a href="#">手机</a>、 <a href="#">数码</a>、<a href="#">通信</a> </li>
+                        <li><a href="#">电脑、办公</a> </li>
+                        <li><a href="#">家居、家具、家装、厨具</a> </li>
+                        <li><a href="#">男装、女装、童装、内衣</a> </li>
+                        <li><a href="#">个户化妆、清洁用品、宠物</a> </li>
+                        <li><a href="#">鞋靴、箱包、珠宝、奢侈品</a> </li>
+                        <li><a href="#">运动户外、钟表</a> </li>
+                        <li><a href="#">汽车、汽车用品</a> </li>
+                        <li><a href="#">母婴、玩具乐器</a> </li>
+                        <li><a href="#">食品、酒类、生鲜、特产</a> </li>
+                        <li><a href="#">医药保健</a> </li>
+                        <li><a href="#">图书、音像、电子书</a> </li>
+                        <li><a href="#">彩票、旅行、充值、票务</a> </li>
+                        <li><a href="#">理财、众筹、白条、保险</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navitems">
+                <ul>
+                    <li><a href="#">服装城</a></li>
+                    <li><a href="#">美妆馆</a></li>
+                    <li><a href="#">生鲜超市</a></li>
+                    <li><a href="#">全球购</a></li>
+                    <li><a href="#">闪购</a></li>
+                    <li><a href="#">团购</a></li>
+                    <li><a href="#">拍卖</a></li>
+                    <li><a href="#">新奇好物</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <!-- nav模块制作 end -->
+    <!-- 首页专有的模块 main start -->
+    <div class="w">
+        <div class="main">
+            <div class="focus">
+                <ul>
+                    <li>
+                        <img src="upload/focus.jpg" alt="">
+                    </li>
+                    <li>
+                        <img src="upload/focus1.jpg" alt="">
+                    </li>
+                    <li>
+                        <img src="upload/focus2.jpg" alt="">
+                    </li>
+                    <li>
+                        <img src="upload/focus3.jpg" alt="">
+                    </li>
+                </ul>
+                <!-- <a href="javascript:;" class="arr-l"> &lt;</a>
+                <a href="javascript:;" class="arr-r font-common"></a> -->
+                <ol class="circle">
+                </ol>
+                <div id="arr">
+                    <span id="left">&#60</span>
+                    <span id="right">&#62</span>
+                </div>
+            </div>
+            <div class="newflash">
+                <div class="news">
+                    <div class="news-hd">
+                        <h5>品质快报</h5>
+                        <a href="#" class="more">更多</a>
+                    </div>
+                    <div class="news-bd">
+                        <ul>
+                            <li>
+                                <a href="#"><strong>[重磅]</strong>两元店开业，全场统统两元统统两元</a>
+                            </li>
+                            <li>
+                                <a href="#"><strong>[重磅]</strong>两元店开业，全场统统两元统统两元</a>
+                            </li>
+                            <li>
+                                <a href="#"><strong>[重磅]</strong>两元店开业，全场统统两元统统两元</a>
+                            </li>
+                            <li>
+                                <a href="#"><strong>[重磅]</strong>两元店开业，全场统统两元统统两元</a>
+                            </li>
+                            <li>
+                                <a href="#"><strong>[重磅]</strong>两元店开业，全场统统两元统统两元</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lifeservice">
+                    <ul>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                        <li>
+                            <i></i>
+                            <p>话费</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bargain">
+                    <img src="upload/bargain.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 首页专有的模块 main end -->
+    <!-- 推荐模块 start-->
+    <div class="w recom">
+        <div class="recom_hd">
+            <img src="images/recom.png" alt="">
+        </div>
+        <div class="recom_bd">
+            <ul>
+                <li><img src="upload/recom_03.jpg" alt=""></li>
+                <li><img src="upload/recom_03.jpg" alt=""></li>
+                <li><img src="upload/recom_03.jpg" alt=""></li>
+                <li><img src="upload/recom_03.jpg" alt=""></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 推荐模块 end-->
+    <!-- 楼层区域制作start -->
+    <div class="floor">
+        <!-- 1楼家用电器楼层 -->
+        <div class="w jiadian">
+            <div class="box_hd">
+                <h3>家用电器</h3>
+                <div class="tab_list">
+                    <ul>
+                        <li> <a href="#" class="style_red">热门</a>|</li>
+                        <li><a href="#">大家电</a>|</li>
+                        <li><a href="#">生活电器</a>|</li>
+                        <li><a href="#">厨房电器</a>|</li>
+                        <li><a href="#">生活电器</a>|</li>
+                        <li><a href="#">个护健康</a>|</li>
+                        <li><a href="#">应季电器</a>|</li>
+                        <li><a href="#">空气/净水</a>|</li>
+                        <li><a href="#">新奇特</a>|</li>
+                        <li><a href="#"> 高端电器</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box_bd">
+                <div class="tab_content">
+                    <div class="tab_list_item">
+                        <div class="col_210">
+                            <ul>
+                                <li><a href="#">节能补贴</a></li>
+                                <li><a href="#">4K电视</a></li>
+                                <li><a href="#">空气净化器</a></li>
+                                <li><a href="#">IH电饭煲</a></li>
+                                <li><a href="#">滚筒洗衣机</a></li>
+                                <li><a href="#">电热水壶</a></li>
+                            </ul>
+                            <a href="#">
+                                <img src="upload/floor-1-1.png" alt="">
+                            </a>
+                        </div>
+                        <div class="col_329">
+                            <a href="#">
+                                <img src="upload/floor-1-b01.png" alt="">
+                            </a>
+                        </div>
+                        <div class="col_221">
+                            <a href="#" class="bb"> <img src="upload/floor-1-2.png" alt=""></a>
+                            <a href="#"> <img src="upload/floor-1-3.png" alt=""></a>
+                        </div>
+                        <div class="col_221">
+                            <a href="#"> <img src="upload/floor-1-4.png" alt=""></a>
+
+                        </div>
+                        <div class="col_219">
+                            <a href="#" class="bb"> <img src="upload/floor-1-5.png" alt=""></a>
+                            <a href="#"> <img src="upload/floor-1-6.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 楼层区域制作end -->
+    <!-- 底部模块的制作 start -->
+    <footer class="footer">
+        <div class="w">
+            <div class="mod_service">
+                <ul>
+                    <li>
+                        <h5></h5>
+                        <div class="service_txt">
+                            <h4>正品保障</h4>
+                            <p>正品保障，提供发票</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h5></h5>
+                        <div class="service_txt">
+                            <h4>正品保障</h4>
+                            <p>正品保障，提供发票</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h5></h5>
+                        <div class="service_txt">
+                            <h4>正品保障</h4>
+                            <p>正品保障，提供发票</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h5></h5>
+                        <div class="service_txt">
+                            <h4>正品保障</h4>
+                            <p>正品保障，提供发票</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="mod_help">
+                <dl>
+                    <dt>服务指南</dt>
+                    <dd><a href="#">购物流程</a></dd>
+                    <dd><a href="#">会员介绍</a></dd>
+                    <dd><a href="#">生活旅行/团购</a></dd>
+                    <dd><a href="#">常见问题</a></dd>
+                    <dd><a href="#">大家电</a></dd>
+                    <dd><a href="#">联系客服</a></dd>
+                </dl>
+                <dl>
+                    <dt>服务指南</dt>
+                    <dd><a href="#">购物流程</a></dd>
+                    <dd><a href="#">会员介绍</a></dd>
+                    <dd><a href="#">生活旅行/团购</a></dd>
+                    <dd><a href="#">常见问题</a></dd>
+                    <dd><a href="#">大家电</a></dd>
+                    <dd><a href="#">联系客服</a></dd>
+                </dl>
+                <dl>
+                    <dt>服务指南</dt>
+                    <dd><a href="#">购物流程</a></dd>
+                    <dd><a href="#">会员介绍</a></dd>
+                    <dd><a href="#">生活旅行/团购</a></dd>
+                    <dd><a href="#">常见问题</a></dd>
+                    <dd><a href="#">大家电</a></dd>
+                    <dd><a href="#">联系客服</a></dd>
+                </dl>
+                <dl>
+                    <dt>服务指南</dt>
+                    <dd><a href="#">购物流程</a></dd>
+                    <dd><a href="#">会员介绍</a></dd>
+                    <dd><a href="#">生活旅行/团购</a></dd>
+                    <dd><a href="#">常见问题</a></dd>
+                    <dd><a href="#">大家电</a></dd>
+                    <dd><a href="#">联系客服</a></dd>
+                </dl>
+                <dl>
+                    <dt>服务指南</dt>
+                    <dd><a href="#">购物流程</a></dd>
+                    <dd><a href="#">会员介绍</a></dd>
+                    <dd><a href="#">生活旅行/团购</a></dd>
+                    <dd><a href="#">常见问题</a></dd>
+                    <dd><a href="#">大家电</a></dd>
+                    <dd><a href="#">联系客服</a></dd>
+                </dl>
+                <dl>
+                    <dt>帮助中心</dt>
+                    <dd>
+                        <img src="images/footer.png" alt="" width="90">品优购客户端
+                    </dd>
+                </dl>
+            </div>
+            <div class="mod_copyright">
+                <div class="links">
+                    <a href="#">关于我们</a> | <a href="#">联系我们</a> | 联系客服 | 商家入驻 | 营销中心 | 手机品优购 | 友情链接 | 销售联盟 | 品优购社区 |
+                    品优购公益 | English Site | Contact U
+                </div>
+                <div class="copyright">
+                    地址：常州市武进区滆湖中路一号拔萃居507 邮编：100000 电话：400-882-3823 传真：010-00000000 邮箱: 292514467@qq.com <br>
+                    京ICP备08001421号京公网安备110108007702
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- 底部模块的制作 end -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档的加载</title>
+    <script>
+        /* onload事件会在整个页面加载完之后才触发 
+            为window绑定一个onload事件
+                该事件对应的响应函数会在页面完成加载后执行，
+                这样可以保证函数执行时，所有的DOM对象已经加载完毕*/ 
+        window.onload = function () {
+            // 获取id为btn的节点
+            var btn = document.getElementById('btn');
+            // 为btn绑定一个单击响应函数
+            btn.onclick = function () {
+                alert('hello');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    
+    <button id="btn">点我</button>
+</body>
+
+</html>

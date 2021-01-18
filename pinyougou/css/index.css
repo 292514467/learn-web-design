@@ -1,0 +1,233 @@
+/* 首页专有的样式 */
+.main{
+    width: 980px;
+    height: 455px;
+    margin-left: 220px;
+    margin-top: 10px;
+}
+.focus {
+    float: left;
+    width: 721px;
+    height: 455px;
+    background-color: purple;
+    overflow: hidden;
+    position: relative;
+}
+.focus ul{
+    position: absolute;
+    width: 2163px;
+}
+.focus ul li{
+    float: left;
+    overflow: hidden;
+}
+.main ol{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    line-height: 20px;
+    text-align: center;
+}
+.main ol li{
+    float: left;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background: rgba(245, 243, 243, 0.5);
+    color: #d85760;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.main ol li .current{
+    background-color: yellow;
+}
+#arr{
+    display: none;
+}
+#arr span {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    margin-top: -20px;
+    background: #000;
+    cursor: pointer;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-family: '黑体';
+    font-size: 30px;
+    color: #fff;
+    opacity: 0.3;
+    border: 1px solid #fff;
+}
+
+#arr #right {
+    right: 5px;
+    left: auto;
+}
+.newflash{
+    float: right;
+    width: 250px;
+    height: 455px;
+}
+.news{
+    height: 165px;
+    border: 1px solid #e4e4e4;
+}
+.news-hd{
+    height: 33px;
+    line-height: 33px;
+    border-bottom: 1px dotted #e4e4e4;
+    padding: 0 15px;
+}
+.news-hd h5{
+    float: left;
+    font-size: 14px;
+}
+.news-hd .more{
+    float: right;
+}
+.news-hd .more::after{
+    font-family: 'icomoon';
+    content:'\e920';
+}
+.news-bd{
+    padding: 5px 15px 0;
+}
+.news-bd ul li{
+    height: 24px;
+    line-height: 24px;
+    /* 溢出隐藏，防止字数过多 */
+    overflow: hidden;
+    /* white-space CSS 属性是用来设置如何处理元素中的空白
+        nowrap值：合并连续的空白符，文本内的换行无效 */
+    white-space: nowrap;
+    /* ellipsis关键字的意思是“用一个省略号 ('…', U+2026 HORIZONTAL ELLIPSIS)来表示被截断的文本”。
+    省略号被添加在内容区域中，因此会减少显示的文本。
+    如果空间小到连省略号都容纳不下，那么这个省略号也会被截断。 */
+    text-overflow: ellipsis;
+}
+.lifeservice{
+    overflow: hidden;
+    height: 209px;
+    border: 1px solid #e4e4e4;
+    border-top: 0;
+}
+.lifeservice ul{
+    width: 252px;
+}
+.lifeservice ul li{
+    float: left;
+    width: 63px;
+    height: 71px;
+    border-right: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    text-align: center;
+}
+.lifeservice ul li i{
+    display: inline-block;
+    width: 24px;
+    height: 28px;
+    background-color: pink;
+    margin-top: 12px;
+    background: url(../images/icons.png) no-repeat -19px -15px;
+}
+.bargain {
+    margin-top: 5px;
+}
+.recom{
+    height: 163px;
+    background-color: #ebebeb;
+    margin-top: 12px;
+}
+.recom_hd{
+    float: left;
+    height: 163px;
+    width: 205px;
+    background-color: #5c5251;
+    text-align: center;
+    padding-top: 30px;
+}
+.recom_bd ul li{
+    float: left;
+    position: relative;
+}
+.recom_bd ul li img{
+    width: 248px;
+    height: 163px;
+}
+/* 在前三张图片之后用宽为1px，背景色为#ddd的小盒子作为划分线 */
+.recom_bd ul li:nth-child(-n+3)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 9px;
+    width: 1px;
+    height: 145px;
+    background-color: #ddd;
+}
+
+/* 家用电器模块 */
+.box_hd{
+    height: 30px;
+    border-bottom: 2px solid #c81623;
+}
+.box_hd h3{
+    float: left;
+    font-size: 18px;
+    color: #c81623;
+    font-weight: 400;
+}
+.tab_list {
+    float: right;
+    line-height: 30px;
+}
+.tab_list ul li{
+    float: left;
+}
+.tab_list ul li a {
+    margin: 0 15px;
+}
+.box_bd {
+    height: 361px;
+}
+.tab_list_item>div{
+    float: left;
+    height: 361px;
+}
+.col_210{
+    width: 210px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+.col_210  ul li {
+    float: left;
+    width: 85px;
+    height: 34px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    line-height: 33px;
+    margin-right: 10px;
+}
+.col_210  ul {
+    padding-left: 12px;
+}
+.col_329{
+    width: 329px;
+}
+.col_221{
+    width: 221px;
+    border-right: 1px solid #ccc;
+}
+.bb{
+     /* 一般情况下，a如果包含有宽度的盒子，a需要转为块级元素 */
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
+.col_219 {
+    width: 219px;
+}

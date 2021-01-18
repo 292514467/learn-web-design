@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后代选择器</title>
+    <style>
+        /* 将ol中的li挑选出修改颜色，补休该ul中的 */
+        /* 元素1 元素2{}——元素2是元素1的后代 */
+        ol li{
+            color: hotpink;
+        }
+        .nav li a{
+            color: rgb(219, 219, 81);
+        }
+    </style>
+</head>
+<body>
+    <ol>
+        <li>ol的后代</li>
+        <li>ol的后代</li>
+        <li>ol的后代</li>
+    </ol>
+    <ul>
+        <li>ul的后代</li>
+        <li>ul的后代</li>
+        <li>ul的后代</li>
+    </ul>
+    <ul class="nav">
+        <li>ul2的后代</li>
+        <li>ul2的后代</li>
+        <li>ul2的后代</li>
+        <li> 
+            <a href="">123</a>
+        </li>
+        <li> 
+            <a href="">321</a>
+        </li>
+        <li> 
+            <a href="">12312312</a>
+        </li>
+    </ul>
+</body>
+</html>

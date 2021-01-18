@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原生js实现简单轮播图</title>
+    <style>
+        * {
+            text-decoration: none;
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            /* border-box值使盒子模型不会被padding和border撑开，便于测量图片像素 */
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 721px;
+            height: 455px;
+            margin: 100px auto;
+            background-color: #ccc;
+            box-shadow: 0px 0px 10px #666666;
+            position: relative;
+            /* 只显示一张图片的大小，溢出宽度的部分隐藏 */
+            overflow: hidden;
+        }
+
+        .screen {
+            position: relative;
+            width: 721px;
+            height: 455px;
+            /* 只显示一张图片的大小，溢出宽度的部分隐藏 */
+            overflow: hidden;
+        }
+
+        .screen ul {
+            position: absolute;
+            /* 设置为五张图片的宽度，四张图片加第一张图片的复制 */
+            width: 3605px;
+            height: 455px;
+        }
+
+        .screen li {
+            float: left;
+            overflow: hidden;
+            width: 721px;
+            height: 455px;
+        }
+
+        #arr {
+            display: none;
+        }
+
+        #arr span {
+            position: absolute;
+            /* z-index: 1; */
+            top: 50%;
+            left: 0px;
+            width: 40px;
+            height: 40px;
+            transform: translate(0, -50%);
+            background-color: rgba(133, 133, 133, 0.5);
+            color: #fff;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: 700;
+            font-family: '黑体';
+            font-size: 30px;
+        }
+
+        #arr #arr_right {
+            right: 0px;
+            left: auto;
+        }
+
+        .screen ol {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .screen ol li {
+            float: left;
+            color: #fff;
+            background-color: rgba(182, 177, 173, 0.5);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .screen ol li.current {
+            background-color: rgb(236, 115, 45, .5);
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            // 1、获取相关元素
+            let container = document.getElementsByClassName('container')[0];
+            let screen = document.getElementsByClassName('screen')[0];
+            let ul = screen.firstElementChild;
+            let imgWidth = screen.offsetWidth;//单张图片的宽度，721px
+            let spanDiv = screen.children[1];
+            console.log('spanDiv  ' + typeof spanDiv);
+            let spanArr = spanDiv.children; 
+            let ol = screen.children[2];
+            console.log(ol);
+
+            // 2、复制第一张图片所在的li,添加到ul的最后面。
+            let ulNewLi = ul.children[0].cloneNode(true);
+            ul.appendChild(ulNewLi);
+
+            // 给ol中添加li，并先点亮第一个圆点
+            for (let i = 0; i < ul.children.length - 1; i++) {
+                let olNewLi = document.createElement('li');
+                olNewLi.innerHTML = i + 1;
+                ol.appendChild(olNewLi);
+            }
+            let olLiArr = ol.children;
+            console.log(olLiArr);
+            olLiArr[0].className = 'current';
+
+            // 鼠标放到具体某圆点时，移动到对应的图片
+            for (let i = 0; i < olLiArr.length; i++) {
+                olLiArr[i].index = i;
+                // console.log(olLiArr[i].index);
+                olLiArr[i].onmouseover = function () {
+                    for (let j = 0; j < olLiArr.length; j++) {
+                        olLiArr[j].className = '';
+                    }
+                    // 此时this指的是olLiArr[i]对象本身
+                    this.className = 'current';
+                    // 修改key来轮播到dot指向的同一张图片
+                    key = i;
+                    animate(ul, imgWidth * (-key));
+                }
+
+            }
+
+            // 给左右箭头添加点击函数，点击左右箭头分别可以轮播到前、后图片
+            spanArr[0].onclick = function () {
+                //通过控制key的自增来模拟图片的索引值，然后移动ul
+                key--;
+                if (key < 0) {
+                    //先移动到最后一张，然后key的值取之前一张的索引值，然后在向前移动
+                    ul.style.left = -imgWidth * (olLiArr.length) + "px";
+                    key = olLiArr.length - 1;
+                }
+                animate(ul, -key * imgWidth);
+                //通过控制dot的自增来模拟小方块的索引值，然后点亮盒子
+                //排他思想做小方块
+                dot--;
+                if (dot < 0) {//索引值不能大于等于5，如果等于5，立刻变为0；
+                    dot = olLiArr.length - 1;
+                }
+                for (var i = 0; i < olLiArr.length; i++) {
+                    olLiArr[i].className = "";
+                }
+                olLiArr[dot].className = "current";
+            };
+            spanArr[1].onclick = function () {
+                //右侧的和定时器一模一样
+                autoPlay();
+            }
+
+
+            // 3、添加计时器
+            // timer是计时器的返回值，是这个定时器的唯一标识
+            // 用来在clearInterval(timer)中作为传入参数清除定时器
+            let timer = setInterval(autoPlay, 1500);
+
+            // 4、鼠标放到和离开container，分别清除和添加定时器，显示和隐藏左右箭头
+            container.onmouseover = function () {
+                spanDiv.style.display = 'block';
+                clearInterval(timer);
+                console.log('onmouseover');
+            }
+            container.onmouseout = function () {
+                spanDiv.style.display = 'none';
+                timer = setInterval(autoPlay, 1500);
+                console.log('onmouseout');
+            }
+
+            // 轮播函数
+            var key = 0;// 用key指代图片索引，从0开始
+            let dot = 0;// 用dot指代ol中圆点的索引，从0开始
+            function autoPlay() {
+                key++;
+                if (key > ul.children.length - 1) {
+                    // console.log(key);// 5
+                    ul.style.left = 0 + 'px';
+                    key = 1;
+                }
+                // 图片向左移动到 imgWidth*(-key) 的位置
+                animate(ul, imgWidth * (-key));
+
+                dot++;// 改变ol中点亮的小圆点
+                if (dot > ol.children.length - 1) {
+                    dot = 0;
+                }
+                for (let i = 0; i < olLiArr.length; i++) {
+                    olLiArr[i].className = '';
+                }
+                olLiArr[dot].className = 'current';
+
+            }
+
+            // 封装匀速动画函数，每30ms移动20px
+            function animate(ele, target) {
+                // console.log(ele);//<ul>...</ul>
+                clearInterval(ele.timer);
+                let speed = target > ele.offsetLeft ? 20 : -20;
+                ele.timer = setInterval(function () {
+                    // 在每次图片移动时，比较距离与步长绝对值大小
+                    let instance = target - ele.offsetLeft;
+                    ele.style.left = ele.offsetLeft + speed + 'px';
+                    // console.log(instance);
+                    if (Math.abs(instance) < Math.abs(speed)) {
+                        ele.style.left = target + 'px';
+                        clearInterval(ele.timer);
+                    }
+                }, 30);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="screen">
+            <ul>
+                <li>
+                    <img src="upload/focus.jpg" alt="">
+                </li>
+                <li>
+                    <img src="upload/focus1.jpg" alt="">
+                </li>
+                <li>
+                    <img src="upload/focus2.jpg" alt="">
+                </li>
+                <li>
+                    <img src="upload/focus3.jpg" alt="">
+                </li>
+            </ul>
+            <div id="arr">
+                <span id="arr_left">&#60</span>
+                <span id="arr_right">&#62</span>
+            </div>
+            <ol></ol>
+        </div>
+    </div>
+</body>
+
+</html>

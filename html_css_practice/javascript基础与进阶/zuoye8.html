@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片切换练习（非轮播图）</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #outer {
+            width: 1000px;
+            padding: 10px;
+            margin: 20px auto;
+            background-color: pink;
+            text-align: center;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let pre = document.getElementById('pre');
+            let next = document.getElementById('next');
+            let img = document.getElementsByTagName('img')[0];
+
+            // 创建一个数组保存图片的路径
+            let imgArr = ['https://i0.hdslb.com/bfs/archive/852208f0c53c91c312fbaff207b92c6581d90c56.png@880w_388h_1c_95q',
+                'https://i0.hdslb.com/bfs/archive/7f7f1428b80fdf3f14f584cb73cbe52bb5862c4b.png@880w_388h_1c_95q',
+                'https://i0.hdslb.com/bfs/archive/7ac1881734202eb70c3accd65fc0d2c9b9500101.png@880w_388h_1c_95q'];
+
+            // 创建一个变量，保存当前正在显示的图片的索引
+            let index = 0;
+
+            let info = document.getElementById('info');
+            // 设置提示文字
+            info.innerHTML = "共有" + imgArr.length + "张图片，当前为第" + (index+1) + "张";
+
+            pre.onclick = function () {
+                if (index !== 0) {
+                    index--;
+                    img.src = imgArr[index];
+                } else {
+                    index = imgArr.length - 1;
+                    img.src = imgArr[index];
+                }
+                info.innerHTML = "共有" + imgArr.length + "张图片，当前为第" + (index+1) + "张";
+
+            }
+            next.onclick = function () {
+                if (index !== imgArr.length-1) {
+                    index++;
+                    img.src = imgArr[index];
+                }else{
+                    index = 0;
+                    img.src = imgArr[index];
+                }
+                info.innerHTML = "共有" + imgArr.length + "张图片，当前为第" + (index+1) + "张";
+
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        <p id="info"></p>
+        <button id="pre">前一张</button>
+
+        <img src="https://i0.hdslb.com/bfs/archive/852208f0c53c91c312fbaff207b92c6581d90c56.png@880w_388h_1c_95q"
+            alt="一张图片">
+
+        <button id="next">后一张</button>
+
+    </div>
+
+</body>
+
+</html>

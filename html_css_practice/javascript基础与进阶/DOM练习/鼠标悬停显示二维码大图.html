@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鼠标悬停时，显示二维码大图</title>
+    <style>
+        .code {
+            width: 50px;
+            height: 50px;
+        }
+
+        .code a {
+            display: block;
+            width: 50px;
+            height: 50px;
+            /* 此处使用了精灵图 */
+            background: url(http://img.smyhvae.com/20180127_QRcode_small.png) no-repeat -158px -51px;
+        }
+
+        /* .code-big {
+            position: absolute;
+            top: 10px;
+            left: 80px;
+        } */
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="code">
+        <a href="#"></a>
+        <img src="http://img.smyhvae.com/2016040102.jpg" alt="" class="code-big hide" />
+    </div>
+</body>
+<script>
+    //需求：鼠标放到a链接上，显示二维码（添加show类名，去掉hide类名）
+    //      鼠标移开a链接，隐藏二维码（添加hide类名，去掉show类名）
+
+    //1.获取事件源和相关元素
+    let a = document.getElementsByTagName('a')[0];
+    let img = a.nextElementSibling;// a的下一个兄弟元素
+    console.log(img);
+
+    //2.绑定事件
+    // fn表示调用函数，fn()表示获取返回值
+    a.onmouseover = fn1;
+    a.onmouseout = fn2;
+
+    //定义方法
+    function fn1() {
+        //3.书写事件驱动程序
+        img.className = 'code-big show';
+        //div.className = div.className.replace("hide", "show");
+    }
+    function fn2() {
+        img.className = 'code-big hide';
+        //了解,字符串操作，把字符串中的hide替换成show。
+        // replace('a','b');用a替换b，b是被替换的
+        // div.className = div.className.replace("show","hide")
+    }
+</script>
+
+</html>

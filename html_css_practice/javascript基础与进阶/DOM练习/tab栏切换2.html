@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab切换：初步的代码</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* css3盒子模型 */
+            box-sizing: border-box;
+        }
+
+        #tab {
+            width: 400px;
+            height: 40px;
+        }
+
+        button {
+            height: 40px;
+            width: 100px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 40px;
+            border: none;
+            background-color: #ccc;
+        }
+
+        #content {
+            width: 400px;
+            background-color: #999;
+            height: 80px;
+            font-size: 20px;
+            text-align: center;
+            line-height: 80px;
+        }
+        .current{
+            background-color: rgb(226, 215, 215);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tab">
+        <button>裤子</button><button>袜子</button><button>鞋子</button><button>帽子</button>
+    </div>
+    <div id="content">
+    </div>
+    <script>
+
+        // 本段中的代码是通过document获取的的标签，如果网页中有很多个这种tab选项卡，必然互相影响。
+         
+        let btnArr = document.getElementsByTagName('button');
+        let content = document.getElementById('content');
+        for (const btn of btnArr) {
+            btn.onmouseover = fn1;
+            btn.onmouseout = fn2;
+        }
+        function fn1() {
+            this.className = 'current';
+            content.innerHTML = this.innerHTML;
+        }
+        function fn2() {
+            this.className = '';
+            content.innerHTML = '';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab栏切换——鼠标悬停时，current元素的背景变色</title>
+    <style>
+        button {
+            width: 100px;
+            height: 40px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #ccc;
+        }
+
+        .current {
+            background-color: rgb(230, 121, 88);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+        <button>按钮4</button>
+    </div>
+    <script>
+        //需求：鼠标放到哪个button上，改button变成黄色背景（添加类）
+        let btnArr = document.getElementsByTagName('button');
+        for (const btn of btnArr) {
+            btn.onmouseover = fn1;
+            btn.onmouseout = fn2;
+        }
+        function fn1() {
+            console.log(this);
+            this.className = 'current';
+        }
+        function fn2() {
+            console.log(this);
+            this.className = '';
+        }
+    </script>
+</body>
+
+</html>

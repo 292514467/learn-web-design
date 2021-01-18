@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用DOM操作css</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color:  red;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let button = document.getElementsByTagName('button')[0];
+            let box = document.getElementById('box');
+            button.onclick = function(){
+                // 修改box的样式
+                /*  通过JS修改元素的样式
+                     语法：元素.style.样式名 = 样式值
+                    
+                    通过style属性设置和读取的都是内联样式，无法读取内联表中的样式
+                */
+               box.style.width = "300px";
+                /* css的样式名中带有 - ，
+                    这种名称在Js中是不合法的，例如background-color，
+                    需要将这种样式名修改为驼峰命名法，
+                    即 去掉 - ，将 - 后的字母改为大写*/ 
+
+               box.style.backgroundColor = 'yellowgreen';
+            }
+        }
+    </script>
+</head>
+<body>
+    <button>点击</button>
+    <br>
+    <br>
+    <div id="box">
+    </div>
+</body>
+</html>

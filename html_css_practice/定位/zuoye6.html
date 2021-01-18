@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现压盖效果</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        .box {
+            margin: 100px;
+			width: 308px;
+			height: 307px;
+			border: 1px solid #FF7E00;
+			position: relative;
+			/*子绝父相*/
+        }
+        .box .img img {
+			width: 308px;
+			height: 196px;
+		}
+        .box .upimg{
+            display: block;
+            background: url(http://img.smyhvae.com/20180116_1115.png);
+            background-position: -108px 0px; /*这里用到了精灵图*/
+            width: 52px;
+			height: 28px;
+            position: absolute;
+            top: -9px;
+			left: 13px;
+        }
+        .box .pronounce{
+            position: absolute;
+            width: 308px;
+            height: 40px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            bottom: 111px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div>
+            <span class="upimg"></span>
+            <div class="img">
+                <img src="http://img.smyhvae.com/20180116_1116.jpg" alt="">
+            </div>
+            <h4 class="pronounce">常州市凯尔锋度广场三楼横店影城</h4>
+        </div>
+    </div>
+</body>
+
+</html>

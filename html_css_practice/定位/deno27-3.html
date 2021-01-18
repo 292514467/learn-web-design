@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>让绝对定位中的盒子在父亲里居中</title>
+
+    <!-- 如果想让一个**标准流中的盒子在父亲里居中**（水平方向看），可以将其设置`margin: 0 auto`属性 -->
+    <!-- 可如果盒子是绝对定位的，此时已经脱标了，如果还想让其居中（位于父亲的正中间），
+                      !!!!!!!!!!!!!!!!!!!!!!
+        可以使用公式：left:50%; margin-left:负的宽度的一半 -->
+    <style>
+        div {
+            width: 600px;
+            height: 200px;
+            /* 绝对定位的盒子 */
+            position: absolute;
+            /* 1、让左边线居中 */
+            left: 50%;
+            /* 2、向左移动宽度（600px）的一半300px */
+            margin-left: -300px;
+            background-color: rgb(186, 226, 93);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+</body>
+
+</html>

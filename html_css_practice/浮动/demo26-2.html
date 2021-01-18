@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除浮动二</title>
+    <!-- 方法二： clear:both  -->
+    <!-- clear就是清除，both指的是左浮动、右浮动都要清除。`clear:both`的意思就是：**不允许左侧和右侧有浮动对象。** -->
+    <!-- 这种方法有一个非常大的、致命的问题，**它所在的标签，margin属性失效了**。 -->
+    <style>
+        li {
+            /* 只给li设置style样式会使两个div的内容在同一行，
+            造成这种现象的根本原因是——li的父亲元素div没有设置高度，导致这两个div的高度均为0px */
+            float: left;
+            width: 100px;
+            height: 20px;
+            background-color: pink;
+        }
+        .box2{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        <ul>
+            <li>111</li>
+            <li>111</li>
+            <li>111</li>
+        </ul>
+    </div>
+    <div class="box2">
+        <ul>
+            <li>222</li>
+            <li>222</li>
+            <li>222</li>
+        </ul>
+    </div>
+</body>
+</html>

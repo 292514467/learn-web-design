@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css3之边框圆角</title>
+    <!-- 边框圆角：`border-radius` 属性 -->
+
+    <!-- 边框每个圆角本质上是一个圆，圆有 水平 和 垂直 半径：如果二者相等，就是圆；如果二者不等， 就是椭圆。-->
+    <!-- 每个边框圆角其实相当于，一个圆与原来的边框角相内切后，两个相切点之间的一段圆弧 -->
+    <style>
+        div {
+            /* 单个属性的写法： */
+            /*  参数：水平半径   垂直半径 */
+            border-top-left-radius: 60px 120px;
+            border-top-right-radius: 60px 120px;
+            border-bottom-left-radius: 60px 120px;
+            border-bottom-right-radius: 60px 120px;
+
+
+            /* 复合写法： */
+            /* 参数：水平半径/垂直半径 */
+            border-radius: 60px/120px; 
+            /* 从左上开始，顺时针赋值。如果当前角没有值，取对角的值 */
+            border-radius: 20px 60px 100px 140px; 
+            border-radius: 20px 60px;
+
+            /* 最简洁的写法：（四个角的半径都相同时） */
+            border-radius: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>

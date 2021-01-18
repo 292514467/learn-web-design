@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab切换：改进版代码（函数封装）</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 500px;
+            height: 200px;
+            border: 1px solid #ccc;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        ul {
+            width: 600px;
+            height: 40px;
+            margin-left: -1px;
+            list-style: none;
+        }
+
+        li {
+            float: left;
+            width: 101px;
+            height: 40px;
+            text-align: center;
+            font: 600 18px/40px "simsun";
+            background-color: pink;
+            cursor: pointer;
+        }
+
+        span {
+            display: none;
+            width: 500px;
+            height: 160px;
+            background-color: yellow;
+            text-align: center;
+            font: 700 100px/160px "simsun";
+        }
+
+        .show {
+            display: block;
+        }
+
+        .current {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li class="current">鞋子</li>
+            <li>袜子</li>
+            <li>帽子</li>
+            <li>裤子</li>
+            <li>裙子</li>
+        </ul>
+        <span class="show">鞋子</span>
+        <span>袜子</span>
+        <span>帽子</span>
+        <span>裤子</span>
+        <span>裙子</span>
+    </div>
+    <div class="box">
+        <ul>
+            <li class="current">鞋子</li>
+            <li>袜子</li>
+            <li>帽子</li>
+            <li>裤子</li>
+            <li>裙子</li>
+        </ul>
+        <span class="show">鞋子</span>
+        <span>袜子</span>
+        <span>帽子</span>
+        <span>裤子</span>
+        <span>裙子</span>
+    </div>
+
+    <div class="box">
+        <ul>
+            <li class="current">鞋子</li>
+            <li>袜子</li>
+            <li>帽子</li>
+            <li>裤子</li>
+            <li>裙子</li>
+        </ul>
+        <span class="show">鞋子</span>
+        <span>袜子</span>
+        <span>帽子</span>
+        <span>裤子</span>
+        <span>裙子</span>
+    </div>
+    <script>
+
+        // 如果代码是通过document获取的的标签，如果网页中有很多个这种tab选项卡，必然互相影响。
+        // 为了多个tab栏彼此独立，我们就需要通过封装函数的方式把他们抽取出来，于是就有了下面的改进版代码
+
+        //需求：鼠标放到上面的li上，li本身变色(添加类)，下方对应的span也显示出来(添加类);
+        //思路：1.点亮上面的盒子。   2.利用索引值显示下面的对应的盒子。
+        let boxArr = document.getElementsByClassName('box');
+
+        // 让每个类为box的盒子都调用函数
+        for (const box of boxArr) {
+            fn(box);
+        }
+
+        // 通过函数fn的封装之后，我们是通过参数element获取元素，而不再是document了。这样可以达到“抽象性”的作用，各个tab栏之间相互独立
+        function fn(ele) {
+            // 注意，此处是使用ele，即传入参数获取事件源
+            let liArr = ele.getElementsByTagName('li');
+
+            let spanArr = ele.getElementsByTagName('span');
+            let i = 0;
+            for (const li of liArr) {
+                li.index = i;
+                //设置index属性并绑定索引值(自定义属性)
+                // liArr[i].setAttribute("index", i);
+                i++;
+                //1.点亮上面的盒子。   2.利用索引值显示下面的盒子。(排他思想)
+                li.onmouseover = function () {
+                    // 排他思想，先将所有的li与span的类名都归为空
+                    for (const li of liArr) {
+                        li.className = '';
+                        spanArr[li.index].className = '';
+                    }
+                    this.className = 'current';
+                    spanArr[this.index].className = 'show';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

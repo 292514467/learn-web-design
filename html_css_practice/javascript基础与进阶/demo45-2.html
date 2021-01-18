@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>offsetParent</title>
+    <!-- `offsetParent`：获取当前元素的  定位父元素  。
+如果当前元素的父元素，有CSS定位（position为absolute、relative、fixed），那么offsetParent获取的是最近的那个父元素。
+如果当前元素的父元素，没有CSS定位（position为absolute、relative、fixed），那么offsetParent获取的是body。-->
+</head>
+
+<body>
+    <div class="box1" style="position: absolute;">
+        <div class="box2" style="position: fixed;">
+            <div class="box3"></div>
+        </div>
+    </div>
+    <script>
+        let box3 = document.getElementsByClassName("box3")[0];
+        console.log(box3.offsetParent);
+    </script>
+</body>
+
+</html>

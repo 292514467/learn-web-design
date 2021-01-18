@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小米简易侧边栏</title>
+    <style>
+        /* 1、把a转换为块元素，这样 a 能够独占一行，并且能够设置宽度和高度 */
+        
+        a{
+            width: 230px;
+            height: 40px;
+            background-color: #55585a;
+            font-size: 14px;
+            /* 文字颜色 */
+            color: #fff;
+            /* 消除下划线 */
+            text-decoration: none;
+            /* 首行缩进 */
+            text-indent: 3em;
+            display: block;
+            /* 一个小技巧 让单行文字垂直居中 */
+            /* 让文字的 行高（line-height） 等于 盒子的高度 */
+            line-height: 40px;
+        }
+        /* 2、鼠标经过 a ，给a设置背景色 */
+        a:hover{
+            background-color: #ff6700;
+        }
+        
+    </style>
+</head>
+<body>
+    <a href="">手机</a>
+    <a href="">电视</a>
+    <a href="">笔记本</a>
+    <a href="">平板电脑</a>
+    <a href="">耳机音响</a>
+    <a href="">路由器</a>
+</body>
+</html>

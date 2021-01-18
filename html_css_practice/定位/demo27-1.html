@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相对定位</title>
+    <!-- 相对定位：不脱标，别的元素不会占据它的位置，即相对定位的元素的真实位置还在原处，只是显示的位置变了 -->
+
+    <!-- 相对定位可以实现 压盖（把一个元素放到另一个元素上） ，但是一般 不用 相对定位来实现
+        相对定位通常只有两个用处:
+        1、微调元素位置
+        2、作为绝对定位的参考，即子绝父相
+         -->
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        .div1 {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+
+        .div2 {
+            /*相对定位：相对于自己原来的位置*/
+            position: relative;
+            /*横坐标：正值表示向右偏移，负值表示向左偏移*/
+            left: 50px;
+            /*纵坐标：正值表示向下偏移，负值表示向上偏移*/
+            top: 50px;
+
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            background-color: pink;
+        }
+
+        .div3 {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div1">1111</div>
+    <div class="div2">2222</div>
+    <div class="div3">3333</div>
+</body>
+
+</html>

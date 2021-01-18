@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css3例子：凹凸文字效果</title>
+    <style>
+        body{
+            background-color: #666666;
+        }
+        div{
+            font-size: 100px;
+            text-align: center;
+            font-weight: 700;
+            font-family: "Microsoft Yahei";
+            color: #666;
+        }
+        /* text-shadow可以设置多个阴影，阴影之间只需要用逗号隔开 */
+        .ao{
+            text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+        }
+        .tu{
+            text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="ao">凹的文字</div>
+    <div class="tu">凸的文字</div>
+</body>
+</html>

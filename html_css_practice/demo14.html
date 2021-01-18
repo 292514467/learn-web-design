@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链接伪类选择器</title>
+    <style>
+        /* 伪类选择器用冒号(:)表示，如:hover :first-child等等 */
+        /* 伪类选择器有很多，包括链接伪类、结构伪类等 */
+
+        /* 为了链接伪类选择器生效，按照  LVHA 顺序，即link visited hove active 顺序 */
+        /* a链接在浏览器中有默认样式，所以实际开发中需要给a单独指定样式 */
+        /* 未访问的链接 */
+        a:link{
+            color: #333333;
+            text-decoration: none;
+        }
+        /* 访问过的链接 */
+        a:visited{
+            color: orange;
+        }
+        /* 鼠标经过的链接 */
+        a:hover{
+            color: skyblue;
+        }
+        /* 鼠标点击未弹起的链接 */
+        a:active{
+            color: green;
+        }
+        /* 实际开发中
+        a{
+            color:gray;
+        }
+        a:hover{
+            color: orange;
+        }
+         */
+    </style>
+</head>
+<body>
+    <a href="#">1231231231231231231</a>
+    <a href="http://www.xxxxxxd.com">asdasdasdas</a>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input标签</title>
+</head>
+
+<body>
+    <form action="xxx.php" method="GET">
+        用户名：<input type="text" name="userName" value="最多输入10个字符" maxlength="10"><br>
+        密码：<input type="password" name="psd"><br>
+        <!-- 定义密码字段，该字段中的字符被掩码 -->
+        性别：男<input type="radio" name="sex" value="男"> 女<input type="radio" name="sex" value="女"><br>
+        <!-- radio 单选按钮 可以实现多选一 -->
+        <!-- radio 单选按钮必须具有相同的name，才可以实现多选一 -->
+        爱好：1<input type="checkbox" name="hobby"> 2<input type="checkbox" name="hobby"> 3<input type="checkbox"
+            name="hobby">
+        <!-- checxBox 复选按钮 可以实现多选 必须具有相同的name-->
+        <br>
+        <input type="submit" value="submit标签文字由value决定"><br>
+        <!-- 点击submit提交按钮，就可以把 表单域form 中的表单元素中的值 传给后台服务器 -->
+        <input type="reset" value="reset标签文字由value决定"><br>
+        <!-- 点击reset重置按钮，就可以还原表单元素初始的默认状态-->
+        <input type="button" value="按钮"><br>
+        <input type="file"><br>
+    </form>
+</body>
+
+</html>

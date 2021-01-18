@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加删除记录练习</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        table {
+            width: 300px;
+            border: 1px solid #000000;
+            border-collapse: collapse;
+            text-align: center;
+            border-spacing: 0px;
+
+        }
+
+        table th,
+        table td {
+            border: 1px solid #000000;
+        }
+
+        #table1,
+        #table2 {
+            width: 300px;
+            margin: 20px auto;
+            /* border: 1px solid #000000; */
+
+        }
+
+        h3 {
+            font-size: 1.5em;
+            font-weight: 400;
+        }
+
+        button {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #666666;
+        }
+
+        a:hover {
+            color: pink;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+
+            let a = document.getElementsByTagName('a');
+            for (let i = 0; i < a.length; i++) {
+                a[i].onclick = delA;
+
+                // 最后返回false，取消超链接的跳转页面的默认行为
+                // return false;
+            }
+
+            let addEmpButton = document.getElementById('addEmpButton');
+            addEmpButton.onclick = function () {
+                // 获取input文本框元素中内容
+                let name = document.getElementById('empName').value;
+                let email = document.getElementById('email').value;
+                let salary = document.getElementById('salary').value;
+                // this.parentNode.parentNode.parentNode.parentNode
+
+                let tr = document.createElement('tr');
+                tr.innerHTML = "<td>" + name + "</td>" +
+                    "<td>" + email + "</td>" +
+                    "<td>" + salary + "</td>" +
+                    "<td><a href='javascript:;'>Delete</a></td>";
+
+                let a = tr.getElementsByTagName('a')[0];
+                a.onclick = delA;
+
+                let tbody = document.getElementsByTagName('tbody')[0];
+                tbody.appendChild(tr);
+            }
+
+            function delA() {
+                // 通过parentNode获取到超链接a的父节点的父节点tr
+                let tr = this.parentNode.parentNode;
+
+                // 获取被删除行的姓名
+                // let name = tr.getElementsByTagName('td')[0].innerHTML;
+                let name = tr.children[0].innerHTML;
+
+                /* 删除之前弹出一个提示框
+                    confirm()用于弹出一个带有确认和取消按钮的提示框
+                     其中需要一个字符串作为参数，用来作为提示文字显示出来
+                    若点击确认会返回true，单击取消会返回false
+                    */
+                let flag = confirm("确定删除" + name + "吗？");
+                if (flag) {
+                    // 点击确认后才会删除信息记录
+                    tr.parentNode.removeChild(tr);
+                }
+
+                // a[i].parentNode.parentNode.parentNode.removeChild(a[i].parentNode.parentNode);
+            };
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="table1">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Salary</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tom</td>
+                    <td>tom@tom.com</td>
+                    <td>10000</td>
+                    <td>
+                        <!-- 把href改为 javascript:; 可以避免点击超链接跳转到其他页面 -->
+                        <a href="javascript:;">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jerry</td>
+                    <td>jerry@jry.com</td>
+                    <td>20000</td>
+                    <td>
+                        <a href="javascript:;">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Bob</td>
+                    <td>bob@bob.com</td>
+                    <td>6000</td>
+                    <td>
+                        <a href="javascript:;">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="table2">
+        <h3>添加新员工</h3>
+        <table>
+            <tr>
+                <td> name: </td>
+                <td><input type="text" name="empName" id="empName"></td>
+            </tr>
+            <tr>
+                <td>salary: </td>
+                <td><input type="text" name="email" id="email"></td>
+            </tr>
+            <tr>
+                <td>email: </td>
+                <td><input type="text" name="salary" id="salary"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button id="addEmpButton">Submit</button>
+                </td>
+
+            </tr>
+        </table>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小米商品</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            background-color: #eeeeee;
+        }
+        .content{
+            width: 300px;
+            height: 320px;
+            padding-left: 20px;
+            margin: 80px auto;
+        }
+        .item{
+            width: 80px;
+            height: 190px;
+            text-align: center;
+            margin-right: 20px;
+            background-color: #fff;
+            float: left;
+            position: relative;
+            top: 0;
+            overflow: hidden; /* 让溢出的内容隐藏起来。意思是让下方的橙色方形先躲起来 */
+            transition: all .5s; /* 从最初到鼠标悬停时的过渡 */  
+        }
+        .item img {
+            margin-top: 30px;
+        }
+        .item .desc{
+            position: absolute;
+            left: 0;
+            bottom: -80px; /* 将橙色方形向下移动80px，即方形本身的高度 */
+            width: 100%;
+            height: 80px;
+            background-color: #ff6700;
+            transition: all .5s;
+        }
+        /* 鼠标悬停时，让 item 整体往上移动5px，且加一点阴影 */
+        .item:hover{
+            top: -5px;
+            box-shadow:0 0 15px #aaaaaa;
+        }
+        /* 鼠标悬停时，让下方的橙色方形现身 */
+        .item:hover .desc{
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="item">
+            <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/7a98170e97ca5df8f5ad2470a8a2d01e.jpg">
+        </div>
+        <div class="item">
+            <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/69a0df49cff71107977bbe3b48af15fa.png">
+            <span class="desc"></span>
+        </div>
+        <div class="item">
+            <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a51c1afa4db8e47e62fad1f6fa4a8970.png">
+            <span class="desc"></span>
+        </div>
+    </div>
+</body>
+</html>
